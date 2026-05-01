@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Invoice</h1>
+
+<p>Name: {{ name }}</p>
+<p>Service: {{ service }}</p>
+
+<table>
+<tr>
+    <th>Item</th>
+    <th>Price</th>
+</tr>
+<tr>
+    <td>Notification Service</td>
+    <td>$10</td>
+</tr>
+</table>
+
+</body>
+</html>

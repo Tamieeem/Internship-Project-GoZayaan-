@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+
+  <h2 style="color: #2c3e50;">Report Summary</h2>
+
+  {% for section in ['all', 'flight', 'hotel'] %}
+  {% set sec_data = stats[section] %}
+
+  <h3 style="color: #4A90D9; margin-top: 30px; text-transform: capitalize;">
+    {{ section | capitalize }} Stats
+  </h3>
+
+  <table style="border-collapse: collapse; margin-bottom: 10px;">
+    <tr>
+      <td style="padding: 6px 16px; background: #f0f4f8; font-weight: bold;">Total Bookings</td>
+      <td style="padding: 6px 16px;">{{ sec_data.total_bookings }}</td>
+      <td style="padding: 6px 16px; background: #f0f4f8; font-weight: bold;">Pax Count</td>
+      <td style="padding: 6px 16px;">{{ sec_data.pax_count }}</td>
+    </tr>
+  </table>
+
+  {% if sec_data.report_data %}
+  <table style="border-collapse: collapse; width: 100%; font-size: 13px; margin-bottom: 20px;">
+    <thead>
+      <tr style="background-color: #4A90D9; color: white;">
+        <th style="padding: 8px 12px; text-align: left;">Currency</th>
+        <th style="padding: 8px 12px; text-align: right;">Total Amount</th>
+        <th style="padding: 8px 12px; text-align: right;">GMV</th>
+        <th style="padding: 8px 12px; text-align: right;">Gross Profit</th>
+        <th style="padding: 8px 12px; text-align: right;">Total Paid</th>
+        <th style="padding: 8px 12px; text-align: right;">Refund</th>
+        <th style="padding: 8px 12px; text-align: right;">Addon</th>
+        <th style="padding: 8px 12px; text-align: right;">Marketing Fee</th>
+        <th style="padding: 8px 12px; text-align: right;">AIT</th>
+        <th style="padding: 8px 12px; text-align: right;">Margin</th>
+        <th style="padding: 8px 12px; text-align: right;">Partner Contribution</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in sec_data.report_data %}
+      <tr style="background-color: {{ '#ffffff' if loop.index is odd else '#f9f9f9' }};">
+        <td style="padding: 7px 12px; font-weight: bold; border-bottom: 1px solid #eee;">{{ row.to_currency }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.total_amount }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.gmv }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.gross_profit }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.total_paid }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.refund_amount }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.addon_amount }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.marketing_fee }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.ait }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.margin }}</td>
+        <td style="padding: 7px 12px; text-align: right; border-bottom: 1px solid #eee;">{{ row.partner_contribution }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color: #999; font-style: italic;">No data available.</p>
+  {% endif %}
+
+  {% endfor %}
+
+</body>
+</html>
